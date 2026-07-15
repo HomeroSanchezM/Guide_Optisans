@@ -10,4 +10,4 @@ This guide is split into several sections:
 - [Practical Example — genetic algorithm](3_Practical_Examples/genetic_algorithm)
 - [Bonus](4_Bonus)
 
-Target audience: users who already have a background in deuteration, SANS contrast variation, and Linux command line usage.
+

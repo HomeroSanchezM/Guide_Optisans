@@ -2,7 +2,6 @@
 
 ## Key concepts
 
-- SANS contrast variation: the D2O percentage in the solvent is varied to modulate the protein contrast and access different parts of the structure.
 - Fitness: product of the areas between the simulated curve and each reference curve, multiplied by the signal-to-background ratio (Imax/background)^gamma.
 - Default reference curves: protonated protein in H2O (D2O=0%) and protonated protein in D2O 100% (all labile H exchanged).
 
@@ -10,10 +9,10 @@
 
 After a genetic algorithm run, OptiSANS creates the following folders:
 
-- `<pdb_stem>_deuterated_pdbs/` — generated deuterated PDB files
-- `<pdb_stem>_primus_out/` — Pepsi-SANS results (.dat) and ref/ folder
-- `<pdb_stem>_final_results/` — final GA result (best solution)
-- `best_fitness_summary.csv` — best fitness per generation
+- `<pdb_stem>_deuterated_pdbs/` : generated deuterated PDB files
+- `<pdb_stem>_primus_out/` : Pepsi-SANS results (.dat) and ref/ folder
+- `<pdb_stem>_final_results/` : final GA result (best solution)
+- `best_fitness_summary.csv` : best fitness per generation
 
 PDB naming convention (required by `parallel_process_pdb.sh`):
 
@@ -27,6 +26,11 @@ All commands are run via `optisans` (or `pixi run optisans` outside a pixi shell
 
 ```bash
 optisans --help
+```
+And to have the option of a given subcommand.
+
+```bash
+optisans deuterate --help
 ```
 
 ### List amino acids
@@ -114,22 +118,4 @@ Main options:
 - `--no-default-ref`: do not create default references
 - `--config`: INI configuration file
 
-## Quick first test
 
-Use GFP as the example protein. Deuterate with a simple pattern:
-
-```bash
-optisans deuterate gfp_clean.pdb -o gfp_test.pdb --d2o 42 --aa LEU,LYS --verbose
-```
-
-Run a simulation:
-
-```bash
-optisans simulate gfp_test.pdb --d2o 42 -j 50
-```
-
-Check results:
-
-```bash
-optisans evaluate gfp_test_primus_out/
-```
