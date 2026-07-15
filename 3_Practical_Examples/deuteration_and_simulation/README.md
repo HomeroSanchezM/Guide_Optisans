@@ -13,7 +13,7 @@ The conditions are defined in [conditions.md](conditions.md).
 Generate a deuterated PDB with a fixed pattern:
 
 ```bash
-optisans deuterate gfp_clean.pdb -o gfp_deutered_42.pdb --d2o 42 --aa LEU,LYS,MET
+optisans deuterate data/gfp.pdb -o gfp_deutered_d2o42.pdb --d2o 42 --aa LEU,LYS,MET
 ```
 
 This creates `gfp_deutered_42.pdb` with:
@@ -27,7 +27,7 @@ Check logs in case of errors. The `--verbose` option shows detailed operation lo
 Execute Pepsi-SANS on the deuterated PDB:
 
 ```bash
-optisans simulate gfp_deutered_42.pdb --d2o 42 -j 50
+optisans simulate gfp_deutered_d2o42.pdb --d2o 42 -j 50
 ```
 
 This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces a `.dat` file in `<pdb_stem>_primus_out/`.
@@ -49,7 +49,7 @@ With `--step 100`, only D2O=0 and D2O=100 are generated, which is enough to obta
 Option B — evaluate an existing folder with ready `.dat` files:
 
 ```bash
-optisans evaluate gfp_deutered_42_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
+optisans evaluate gfp_deutered_d2o42_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
 ```
 
 This produces a summary of fitness scores.
