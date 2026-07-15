@@ -1,4 +1,4 @@
-# Practical Example — Deuteration and SANS Simulation
+# Practical Example : Deuteration and SANS Simulation
 
 Objective: deuterate a GFP PDB according to given conditions, generate the corresponding SANS curves, and evaluate their fitness.
 
@@ -8,12 +8,12 @@ The conditions are defined in [conditions.md](conditions.md).
 
 ## Procedure
 
-### Step 1 — Deuterate the PDB
+### Step 1 : Deuterate the PDB
 
 Generate a deuterated PDB with a fixed pattern:
 
 ```bash
-optisans deuterate data/gfp.pdb -o gfp_deutered_d2o42.pdb --d2o 42 --aa LEU,LYS,MET
+optisans deuterate data/gfp.pdb -o results/gfp_deutered_d2o42.pdb --d2o 42 --aa LEU,LYS,MET
 ```
 
 This creates `gfp_deutered_42.pdb` with:
@@ -22,39 +22,38 @@ This creates `gfp_deutered_42.pdb` with:
 
 Check logs in case of errors. The `--verbose` option shows detailed operation logs.
 
-### Step 2 — Run the Pepsi-SANS simulation
+### Step 2 : Generate the reference PDB
+
+Generate the D2O=0 and D2O=100 DPBs in a ref folder
+
+```bash
+optisans deuterate data/gfp.pdb -o results/ref/gfp_total_deuteration.pdb --d2o 100 
+optisans deuterate data/gfp.pdb -o results/ref/gfp_total_protonation.pdb --d2o 0 
+```
+
+### Step 3 : Run the Pepsi-SANS simulation
 
 Execute Pepsi-SANS on the deuterated PDB:
 
 ```bash
-optisans simulate gfp_deutered_d2o42.pdb --d2o 42 -j 50
+optisans simulate results/ 
 ```
 
-This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces a `.dat` file in `<pdb_stem>_primus_out/`.
+This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces a `.dat` file in `<folder_stem>_primus_out/`.
 
-If D2O is not specified via `--d2o`, it is extracted from the filename. If the file does not contain a `_d2oXX` pattern, the simulation runs without the `--d2o` flag and Pepsi-SANS uses its default value.
+If D2O is not specified via `--d2o`, it is extracted from the filename.
 
-### Step 3 — Generate references and evaluate
+### Step 4 : Evaluate the fitness of the deuterated PDB
 
-To evaluate the curve, you need references in `ref/`. Two options:
-
-Option A — use `recycle` which automatically generates references:
+To evaluate an existing folder with ready `.dat` files:
 
 ```bash
-optisans recycle gfp_clean.pdb --d2o 42 --aa LEU,LYS,MET --step 100
-```
-
-With `--step 100`, only D2O=0 and D2O=100 are generated, which is enough to obtain the two default references. The full scan is not run.
-
-Option B — evaluate an existing folder with ready `.dat` files:
-
-```bash
-optisans evaluate gfp_deutered_d2o42_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
+optisans evaluate results_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
 ```
 
 This produces a summary of fitness scores.
 
-### Step 4 — Interpretation
+### Interpretation
 
 The `.dat` file produced by Pepsi-SANS contains the columns `q` and `I(q)` (scattered intensity). Fitness is computed as:
 

@@ -20,6 +20,8 @@ Install pixi with
 curl -fsSL https://pixi.sh/install.sh | sh
 ```
 
+Close and reopen your terminal after that to refreash the shell
+
 Clone the repository and enter the pixi environment:
 
 ```bash
