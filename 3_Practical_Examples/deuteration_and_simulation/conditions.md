@@ -21,16 +21,16 @@
 
 ```bash
 # 1. Deuterate
-optisans deuterate data/gfp.pdb -o gfp_deutered_d2o42.pdb --d2o 42 --aa LEU,LYS,MET --verbose
+optisans deuterate data/gfp.pdb -o results/gfp_deutered_d2o42.pdb --d2o 42 --aa LEU,LYS,MET
+# 2. Generate reference Simulate
+optisans simulate results/
 
-# 2. Simulate
-optisans simulate gfp_deutered_d2o42.pdb --d2o 42 -j 50
-
-# 3. Generate references (optional)
-optisans recycle data/gfp.pdb --d2o 42 --aa LEU,LYS,MET --step 100
+# 3. Simulate)
+optisans deuterate data/gfp.pdb -o results/ref/gfp_total_deuteration.pdb --d2o 100 
+optisans deuterate data/gfp.pdb -o results/ref/gfp_total_protonation.pdb --d2o 0 
 
 # 4. Evaluate
-optisans evaluate gfp_deutered_d2o42_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
+optisans evaluate results_primus_out/ --q-max 0.3 --ratio-threshold 0.01 --gamma 2
 ```
 
 ## Success criteria
