@@ -33,15 +33,15 @@ optisans deuterate data/gfp.pdb -o results/ref/gfp_total_protonation.pdb --d2o 0
 
 ### Step 3 : Run the Pepsi-SANS simulation
 
-Execute Pepsi-SANS on the deuterated PDB:
+Run Pepsi-SANS on the whole `results/` folder. This processes the deuterated PDB and the reference PDBs in `results/ref/` automatically:
 
 ```bash
-optisans simulate results/gfp_deutered_d2o42.pdb --d2o 42
+optisans simulate results/
 ```
 
-This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces a `.dat` file in `<folder_stem>_primus_out/`.
+This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces the `.dat` files in `results_primus_out/` (the reference curves in `results_primus_out/ref/`).
 
-If D2O is not specified via `--d2o`, it is extracted from the filename.
+D2O values are extracted from the filenames (`_d2o42.pdb` → 42%, `_total_deuteration.pdb` → 100%, `_total_protonation.pdb` → 0%).
 
 ### Step 4 : Evaluate the fitness of the deuterated PDB
 
