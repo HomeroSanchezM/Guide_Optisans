@@ -7,7 +7,10 @@ After GA execution, the following folders are created:
 - `gfp_deuterated_pdbs/` : one PDB per chromosome and per generation
 - `gfp_primus_out/` : simulated SANS curves (.dat) and ref/ folder
 - `gfp_final_results/` : best solution and fitness history
+  - `pdb/` : best deuterated PDB (`gfp_best_fitness.pdb`) and reference PDBs in `pdb/ref/`
+  - `sans_simulation/` : best simulated SANS curve (`gfp_best_fitness.dat`) and reference curves in `sans_simulation/ref/`
   - `gfp_best_fitness.csv`
+  - `config.ini`
 
 ## Reading the best genome
 

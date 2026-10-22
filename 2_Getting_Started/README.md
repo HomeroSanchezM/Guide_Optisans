@@ -51,8 +51,8 @@ Main options:
 - `-o, --output`: output PDB path
 - `--d2o`: D2O percentage for labile H (0-100)
 - `--aa`: list of AAs to deuterate, separated by spaces or commas
-- `--all`: deuterate all AAs
-- `--config`: INI configuration file
+
+All other deuteration parameters (exchange mode, sampling, seed, accessibility, etc.) use their default values.
 
 ### Run a SANS simulation (fixed contrast)
 
@@ -65,6 +65,8 @@ By default, D2O is extracted from the filename using the `_d2oXX.pdb` convention
 ```bash
 optisans simulate deuterated.pdb --d2o 42
 ```
+
+`SOURCE` can be a single PDB file or a directory containing PDB files.
 
 Useful options:
 - `-j, --jobs`: number of parallel jobs (default 150)
@@ -80,6 +82,7 @@ optisans recycle protein.pdb --d2o 42 --aa LEU,LYS
 Generates all PDBs from D2O=0% to 100%, runs Pepsi-SANS, evaluates fitness, and produces fitness vs D2O and I(0) vs D2O plots.
 
 Options:
+- `--d2o`: D2O percentage for the pattern reference curve (required)
 - `--step`: D2O scan step (default 1 = every percentage point)
 - `--output-dir`: custom output directory
 - `--no-default-ref`: do not generate default references
@@ -96,6 +99,7 @@ Options:
 - `--q-max`: q truncation limit (default 0.3 A^-1)
 - `--ratio-threshold`: minimum ratio (default 0.01)
 - `--gamma`: ratio exponent (default 2)
+- `--csv`: CSV output file for fitness scores
 
 ### Run the full genetic algorithm
 
@@ -112,10 +116,15 @@ Main options:
 - `--d2o-var`: max D2O mutation amplitude per mutation (0-100, default 5)
 - `--seed`: random seed for reproducibility
 - `--d2o`: lock explored D2O values (e.g. `--d2o 0 --d2o 42 --d2o 100`)
+- `--restriction`: forbid the deuteration of one or more amino-acid types (repeatable, e.g. `--restriction ASN`; linked pairs stay linked)
 - `--patience`: early stopping if no improvement for N generations (default 50, 0 = disabled)
 - `--q-max`, `--ratio-threshold`, `--gamma`: fitness parameters
 - `--ref`: additional PDB references
 - `--no-default-ref`: do not create default references
+- `--output-dir`: custom output directory
+- `--batch-script`: path to `parallel_process_pdb.sh`
+- `--conc`: Pepsi-SANS concentration in mg/mL (default 2.5)
+- `--verbose`: enable verbose logging
 - `--config`: INI configuration file
 
 

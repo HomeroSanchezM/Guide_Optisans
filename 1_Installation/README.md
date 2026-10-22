@@ -6,7 +6,7 @@ OptiSANS depends on the following components:
 
 - Pepsi-SANS 3.0 
 - Python >= 3.11
-- Python packages: numpy ; dataclasses ; biopython ; gemmi ; matplotlib
+- Python packages (managed by pixi): numpy ; gemmi ; matplotlib ; pyyaml ; biopython
 - GNU parallel 
 - pixi (reproducible environment manager)
 

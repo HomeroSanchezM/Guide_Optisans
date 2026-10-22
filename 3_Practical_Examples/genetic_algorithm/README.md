@@ -28,7 +28,10 @@ the log displays for each generation:
 
 Files produced in `<pdb_stem>_final_results/`:
 
+- `pdb/`: the best deuterated PDB (`<pdb_stem>_best_fitness.pdb`) and the reference PDBs in `pdb/ref/`.
+- `sans_simulation/`: the best simulated SANS curve (`<pdb_stem>_best_fitness.dat`) and the reference curves in `sans_simulation/ref/`.
 - `<pdb_stem>_best_fitness.csv`: summary of the best chromosome (deuterated AAs, D2O, fitness, ratio, H/D counts).
+- `config.ini`: the effective configuration of the run.
 
 Display the summary:
 

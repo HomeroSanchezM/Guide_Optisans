@@ -24,7 +24,7 @@
 ## Commands
 
 ```bash
-optisans run gfp_clean.pdb -p 30 -e 5 -g 30 --seed 42 --d2o 0 --d2o 42 --d2o 100
+optisans run data/gfp.pdb -p 30 -e 5 -g 30 --seed 42 --d2o 0 --d2o 42 --d2o 100
 ```
 
 Useful options for adjustment:
@@ -38,6 +38,6 @@ Useful options for adjustment:
 ## Success criteria
 
 - The `<pdb_stem>_final_results/` folder is created.
-- `best_solution_summary.csv` contains at least one line with fitness > 0.
-- `best_fitness_summary.csv` contains 31 lines (1 header + 30 generations).
-- The best individual's PDB is present in `<pdb_stem>_deuterated_pdbs/`.
+- `<pdb_stem>_best_fitness.csv` in `_final_results/` contains at least one line with fitness > 0.
+- `best_fitness_summary.csv` in `<pdb_stem>_deuterated_pdbs/` contains 31 lines (1 header + 30 generations).
+- The best individual's PDB is present in `<pdb_stem>_final_results/pdb/`.

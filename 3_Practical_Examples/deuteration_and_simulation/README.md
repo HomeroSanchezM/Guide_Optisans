@@ -36,7 +36,7 @@ optisans deuterate data/gfp.pdb -o results/ref/gfp_total_protonation.pdb --d2o 0
 Execute Pepsi-SANS on the deuterated PDB:
 
 ```bash
-optisans simulate results/ 
+optisans simulate results/gfp_deutered_d2o42.pdb --d2o 42
 ```
 
 This calls `parallel_process_pdb.sh`, which runs Pepsi-SANS in parallel and produces a `.dat` file in `<folder_stem>_primus_out/`.

@@ -13,7 +13,7 @@ After execution, you should obtain:
 
 | Problem | Likely cause | Solution |
 |----------|---------------|----------|
-| No `.dat` in `_primus_out/` | Pepsi-SANS failed | Run with `--verbose`, check that `Pepsi-SANS-Linux/Pepsi-SANS` is executable |
+| No `.dat` in `results_primus_out/` | Pepsi-SANS failed | Run with `--verbose`, check that `Pepsi-SANS-Linux/Pepsi-SANS` is executable |
 | Ratio is 0 | `Imax < ratio_threshold` or D2O not detected | Check the PDB filename and `--d2o` flag |
 | Null fitness | missing references in `ref/` | Generate references with `recycle` or place `.dat` files manually |
 | `File not found` error | incorrect path | Use an absolute path or run from the correct directory |
